@@ -7,8 +7,28 @@ POST http://localhost:3333/videos
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="1.png"
-Content-Type: image/png
+Content-Disposition: form-data; name="file"; filename="audio.mp3"
+Content-Type: audio/mpeg
 
-< ./1.png
+< ./audio.mp3
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+# @name create-transcription
+POST http://localhost:3333/videos/a9a80430-b697-448a-ac65-8e17baac8adc/transcription
+Content-Type: application/json
+
+{
+  "prompt": "indiozinhos"
+}
+
+###
+# @name generate-ai-completion
+POST http://localhost:3333/ai/complete
+Content-Type: application/json
+
+{
+  "videoId": "a9a80430-b697-448a-ac65-8e17baac8adc",
+  "template": "Gere um resumo sucinto da transcrição do video informada a seguir: '''{transcription}'''",
+  "temperature": 0.5
+}
